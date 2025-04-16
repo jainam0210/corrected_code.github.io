@@ -31,7 +31,7 @@ async def create_item(item: Item):
 async def delete_item(item_id: str):  # Corrected function signature
     collection = await get_items_collection()
     result = await collection.delete_one({"_id": ObjectId(item_id)})
-    result2 = await collection.delete_one({"_id": ObjectId(item_details)})
+    # result2 = await collection.delete_one({"_id": ObjectId(item_details)})
     if result.deleted_count:
-        return {"status": "deleted", "deleted_item":result2}
+        return {"status": "deleted"} #Removed result2
     raise HTTPException(status_code=404, detail="Item not found")
