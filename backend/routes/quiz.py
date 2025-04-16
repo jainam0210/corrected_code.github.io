@@ -41,14 +41,14 @@ game_state = {"high_score": 0}
 # god would hate me for not dockerizing this repo
 @router.get("/question")
 async def get_question():
-    question = questions[1]
+    question = random.choice(questions) #it was always giving 2nd question
     return {
         "id": question["id"],
         "text": question["text"],
         "options": question["options"]
     }
 
-@router.get("/answer")
+@router.post("/answer") # get doesn't have a body changed to post
 async def submit_answer(data: dict):
     question_id = data.get("id")
     answer = data.get("answer")
