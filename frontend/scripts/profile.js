@@ -3,6 +3,7 @@ async function loadUsers() {
   const res = await fetch(`/users`);
   const users = await res.json();
   const list = document.getElementById("userList");
+  const basURL = "http://localhost:8000"; // profile.js baseURL is undefined
   list.innerHTML = "";
   
   document.getElementById("userCounts").textContent = `Total users: ${users.length}`;
