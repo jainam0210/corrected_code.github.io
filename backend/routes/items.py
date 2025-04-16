@@ -28,7 +28,7 @@ async def create_item(item: Item):
 #     return {"id": "Item Inserted"} #Duplicate of post removed
 # I want a chocolate
 @router.delete("/{item_id}") # Corrected route signature and method
-async def delete_item(item_id: str, item_details:str):
+async def delete_item(item_id: str):  # Corrected function signature
     collection = await get_items_collection()
     result = await collection.delete_one({"_id": ObjectId(item_id)})
     result2 = await collection.delete_one({"_id": ObjectId(item_details)})
