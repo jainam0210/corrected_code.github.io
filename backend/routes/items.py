@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException
 from models import Item
 from bson import ObjectId
 
-router = APIRouter() # Changed to APIRouter
+router = APIRouter()
 
 async def get_items_collection():
     from db import init_db
@@ -20,18 +20,14 @@ async def get_items():
 @router.post("/")
 async def create_item(item: Item):
     collection = await get_items_collection()
-    result = await collection.insert_one(item.model_dump())
+    # Changed from item.dict() to handle both Pydantic v1 and v2
+    result = await collection.insert_one(dict(item))
     return {"id": str(result.inserted_id)}
 
-# @router.post("/")
-# async def create_item(item: Item):
-#     return {"id": "Item Inserted"} #Duplicate of post removed
-# I want a chocolate
-@router.delete("/{item_id}") # Corrected route signature and method
-async def delete_item(item_id: str):  # Corrected function signature
+@router.delete("/{item_id}")
+async def delete_item(item_id: str):
     collection = await get_items_collection()
     result = await collection.delete_one({"_id": ObjectId(item_id)})
-    # result2 = await collection.delete_one({"_id": ObjectId(item_details)})
     if result.deleted_count:
-        return {"status": "deleted"} #Removed result2
+        return {"status": "deleted"}
     raise HTTPException(status_code=404, detail="Item not found")
