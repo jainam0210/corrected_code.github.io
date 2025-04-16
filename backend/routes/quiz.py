@@ -48,7 +48,7 @@ async def get_question():
         "options": question["options"]
     }
 
-@router.get("/answer")
+@router.post("/answer") # get doesn't have a body changed to post
 async def submit_answer(data: dict):
     question_id = data.get("id")
     answer = data.get("answer")
