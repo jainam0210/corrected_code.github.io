@@ -1,4 +1,4 @@
-const baseURL = "http://localhost:8001";
+const baseURL = "http://localhost:8000";  // port should be 8000 not 8001 for HTTP
 
 async function loadAnalytics() {
   const res = await fetch(`${baseURL}/analytics`);
