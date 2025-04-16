@@ -1,10 +1,21 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from routes.items import router as items_router
 from routes.analytics import router as analytics_router
 from routes.quiz import router as quiz_router
 from routes.users import router as users_router # Added import for users router
 
 app = FastAPI()
+
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # Allows all origins - restrict in production if needed
+    allow_credentials=True,
+    allow_methods=["*"], # Allows all HTTP methods
+    allow_headers=["*"], # Allows all headers
+)
 
 app.include_router(items_router, prefix="/items")
 app.include_router(users_router, prefix="/users") # Added router

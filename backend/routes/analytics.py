@@ -64,8 +64,8 @@ async def get_analytics():
     buffer.seek(0)
     image_base64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
     plt.close()
-    
+    plot_data_uri = f"data:image/png;base64,{image_base64}" 
     return JSONResponse({
         "stats": stats,
-        "plot":image_base64 #The image wasn't being returned in the JSON response
+        "plot":plot_data_uri #The image wasn't being returned in the JSON response
     })
