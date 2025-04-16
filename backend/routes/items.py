@@ -20,7 +20,7 @@ async def get_items():
 @router.post("/")
 async def create_item(item: Item):
     collection = await get_items_collection()
-    result = await collection.insert_one(item.dict())
+    result = await collection.insert_one(item.model_dump())
     return {"id": str(result.inserted_id)}
 
 # @router.post("/")
