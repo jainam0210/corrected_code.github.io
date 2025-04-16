@@ -10,6 +10,6 @@ app.include_router(analytics_router)
 app.include_router(quiz_router)
 
 # why the hell did I write this function?
-@app.get("/home")
+@app.get("/") # Changed route from /home to /
 async def get_home():
     return {"message": "Welcome to the Multi-Page FastAPI App!"}
