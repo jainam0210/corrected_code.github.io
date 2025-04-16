@@ -66,3 +66,17 @@ async function loadNews(searchTerm = "", source = "all", reset = false) {
 
 
 loadNews();
+
+// 🔽 Added these lines below to fix the loading
+document.getElementById("search").addEventListener("input", () => {
+  const term = document.getElementById("search").value;
+  const source = document.getElementById("source").value;
+  loadNews(term, source);
+});
+
+document.getElementById("source").addEventListener("change", () => {
+  const source = document.getElementById("source").value;
+  const term = document.getElementById("search").value;
+  loadNews(term, source, true); // reset list when changing source
+});
+
