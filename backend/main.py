@@ -9,7 +9,7 @@ app = FastAPI()
 app.include_router(items_router, prefix="/items")
 app.include_router(users_router, prefix="/users") # Added router
 app.include_router(analytics_router, prefix="/analytics") # Added prefix
-app.include_router(quiz_router)
+app.include_router(quiz_router, prefix="/quiz") # Added prefix
 
 # why the hell did I write this function?
 @app.get("/") # Changed route from /home to /
